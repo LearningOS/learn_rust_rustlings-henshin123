@@ -3,8 +3,6 @@
 // (no lines with multiple semicolons necessary!)
 // Execute `rustlings hint move_semantics3` for hints :)
 
-// I AM NOT DONE
-
 fn main() {
     let vec0 = Vec::new();
 
@@ -18,9 +16,10 @@ fn main() {
 }
 
 fn fill_vec(vec: Vec<i32>) -> Vec<i32> {
-    vec.push(22);
-    vec.push(44);
-    vec.push(66);
+    let mut temp = vec;
+    temp.push(22);
+    temp.push(44);
+    temp.push(66);
 
-    vec
+    temp
 }
