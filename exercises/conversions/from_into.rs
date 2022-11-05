@@ -33,10 +33,35 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of Person
 // Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
-
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        if s.is_empty() {
+            return Person::default();
+        }
+        let mut split = s.split(",");
+        let split_count = s.split(",").count();
+        let mut is_legal = false;
+        // 检查是否合法
+        let name = split.next().unwrap_or_else(|| {
+            is_legal = false;
+            return "";
+        });
+        let age = split.next().unwrap_or_else(|| {
+            is_legal = false;
+            return "";
+        });
+        let age_parse = age.parse::<usize>();
+        if !name.is_empty() && !age.is_empty() && age_parse.is_ok() && split_count == 2 {
+            is_legal = true;
+        }
+        if is_legal {
+            Person {
+                name: name.to_string(),
+                age: age_parse.unwrap(),
+            }
+        } else {
+            Person::default()
+        }
     }
 }
 
